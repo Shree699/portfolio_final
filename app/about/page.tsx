@@ -235,7 +235,7 @@ export default function AboutPage() {
                 <div key={i} className="group relative md:pl-16">
                   {/* Node */}
                   <div
-                    className="absolute left-4 top-5 w-5 h-5 rounded-full border-2 hidden md:flex items-center justify-center -translate-x-1/2 transition-all duration-300 group-hover:scale-125"
+                    className="absolute left-6 top-5 w-5 h-5 rounded-full border-2 hidden md:flex items-center justify-center -translate-x-1/2 transition-all duration-300 group-hover:scale-125"
                     style={{ borderColor: item.color, background: '#050505', boxShadow: `0 0 10px ${item.color}40` }}
                   >
                     <div className="w-2 h-2 rounded-full" style={{ background: item.color }} />

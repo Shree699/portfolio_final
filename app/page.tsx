@@ -307,8 +307,10 @@ const FEATURED_PROJECTS = [
     subtitle: 'Altium Designer — 50+ Components',
     tags: ['Altium Designer', 'PCB Routing', 'DFM'],
     color: '#1E88E5',
-    image: 'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/projects/dac-pcb.jpg',
     href: '/projects',
+    contain: true,
+    imageBg: 'bg-gradient-to-b from-[#C0C5CB] to-[#818D99]',
   },
 ];
 
@@ -328,20 +330,22 @@ const SKILL_TAGS = [
 ];
 
 function FeaturedCard({
-  title, subtitle, tags, color, image, href,
+  title, subtitle, tags, color, image, href, contain, imageBg,
 }: {
-  title: string; subtitle: string; tags: string[]; color: string; image: string; href: string;
+  title: string; subtitle: string; tags: string[]; color: string; image: string; href: string; contain?: boolean; imageBg?: string;
 }) {
   return (
     <Link href={href} className="group block relative rounded-xl overflow-hidden border border-[#1C222B] hover:border-cyan-400/30 transition-all duration-500">
       {/* Image */}
-      <div className="relative h-48 overflow-hidden">
+      <div className={`relative h-48 overflow-hidden ${contain ? (imageBg || '') : ''}`}>
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.2), rgba(5,5,5,0.8))' }} />
+        {!contain && (
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.2), rgba(5,5,5,0.8))' }} />
+        )}
         {/* Color accent */}
         <div
           className="absolute top-0 left-0 right-0 h-px"

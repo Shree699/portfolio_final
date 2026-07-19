@@ -8,14 +8,14 @@ const SKILL_CATEGORIES = [
     label: 'Embedded Systems',
     color: '#00E5FF',
     skills: [
-      { name: 'ESP32 / ESP-IDF', level: 95 },
-      { name: 'STM32', level: 95 },
-      { name: 'Arduino / AVR', level: 95 },
-      { name: 'NVIDIA Jetson Orin', level: 75 },
-      { name: 'Raspberry Pi 5', level: 75 },
-      { name: 'Sensor Integration', level: 92 },
-      { name: 'Embedded Firmware', level: 90 },
-      { name: 'Bare Metal Programming', level: 88 },
+      { name: 'ESP32 / ESP-IDF', level: 95, logo: 'https://cdn.simpleicons.org/espressif/E7352C' },
+      { name: 'STM32', level: 95, logo: 'https://cdn.simpleicons.org/stmicroelectronics/03234B' },
+      { name: 'Arduino / AVR', level: 95, logo: 'https://cdn.simpleicons.org/arduino/00878A' },
+      { name: 'NVIDIA Jetson Orin', level: 75, logo: 'https://cdn.simpleicons.org/nvidia/76B900' },
+      { name: 'Raspberry Pi 5', level: 75, logo: 'https://cdn.simpleicons.org/raspberrypi/A22846' },
+      { name: 'Sensor Integration', level: 92, logo: null },
+      { name: 'Embedded Firmware', level: 90, logo: null },
+      { name: 'Bare Metal Programming', level: 88, logo: null },
     ],
   },
   {
@@ -23,14 +23,14 @@ const SKILL_CATEGORIES = [
     label: 'PCB Design',
     color: '#00FF9C',
     skills: [
-      { name: 'Altium Designer', level: 90 },
-      { name: 'KiCad', level: 88 },
-      { name: 'Proteus', level: 82 },
-      { name: 'Schematic Capture', level: 95 },
-      { name: 'PCB Routing', level: 90 },
-      { name: 'Component Placement', level: 90 },
-      { name: 'Multilayer PCB', level: 85 },
-      { name: 'DFM', level: 80 },
+      { name: 'Altium Designer', level: 90, logo: 'https://cdn.simpleicons.org/altiumdesigner/A5915F' },
+      { name: 'KiCad', level: 88, logo: 'https://cdn.simpleicons.org/kicad/314CB0' },
+      { name: 'Proteus', level: 82, logo: null },
+      { name: 'Schematic Capture', level: 95, logo: null },
+      { name: 'PCB Routing', level: 90, logo: null },
+      { name: 'Component Placement', level: 90, logo: null },
+      { name: 'Multilayer PCB', level: 85, logo: null },
+      { name: 'DFM', level: 80, logo: null },
     ],
   },
   {
@@ -38,12 +38,12 @@ const SKILL_CATEGORIES = [
     label: 'Programming',
     color: '#1E88E5',
     skills: [
-      { name: 'Embedded C', level: 92 },
-      { name: 'Python', level: 90 },
-      { name: 'C / C++', level: 90 },
-      { name: 'Bare Metal Programming', level: 88 },
-      { name: 'Arduino Scripting', level: 93 },
-      { name: 'Bash / Shell', level: 75 },
+      { name: 'Embedded C', level: 92, logo: null },
+      { name: 'Python', level: 90, logo: 'https://cdn.simpleicons.org/python/3776AB' },
+      { name: 'C / C++', level: 90, logo: 'https://cdn.simpleicons.org/cplusplus/00599C' },
+      { name: 'Bare Metal Programming', level: 88, logo: null },
+      { name: 'Arduino Scripting', level: 93, logo: 'https://cdn.simpleicons.org/arduino/00878A' },
+      { name: 'Bash / Shell', level: 75, logo: 'https://cdn.simpleicons.org/gnubash/4EAA25' },
     ],
   },
   {
@@ -51,13 +51,13 @@ const SKILL_CATEGORIES = [
     label: 'AI & Computer Vision',
     color: '#9D4EDD',
     skills: [
-      { name: 'YOLO / YOLO11', level: 88 },
-      { name: 'OpenCV', level: 88 },
-      { name: 'PyTorch', level: 80 },
-      { name: 'Computer Vision', level: 85 },
-      { name: 'Object Detection', level: 88 },
-      { name: 'Edge AI Deployment', level: 80 },
-      { name: 'Image Processing', level: 85 },
+      { name: 'YOLO / YOLO11', level: 88, logo: null },
+      { name: 'OpenCV', level: 88, logo: 'https://cdn.simpleicons.org/opencv/5C3EE8' },
+      { name: 'PyTorch', level: 80, logo: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
+      { name: 'Computer Vision', level: 85, logo: null },
+      { name: 'Object Detection', level: 88, logo: null },
+      { name: 'Edge AI Deployment', level: 80, logo: 'https://cdn.simpleicons.org/nvidia/76B900' },
+      { name: 'Image Processing', level: 85, logo: null },
     ],
   },
   {
@@ -65,12 +65,12 @@ const SKILL_CATEGORIES = [
     label: 'Protocols',
     color: '#00E5FF',
     skills: [
-      { name: 'CAN Bus', level: 90 },
-      { name: 'UART / USART', level: 95 },
-      { name: 'I2C / SMBus', level: 95 },
-      { name: 'SPI', level: 93 },
-      { name: 'GPIO / ADC / PWM', level: 95 },
-      { name: 'USB (Basic)', level: 72 },
+      { name: 'CAN Bus', level: 90, logo: null },
+      { name: 'UART / USART', level: 95, logo: null },
+      { name: 'I2C / SMBus', level: 95, logo: null },
+      { name: 'SPI', level: 93, logo: null },
+      { name: 'GPIO / ADC / PWM', level: 95, logo: null },
+      { name: 'USB (Basic)', level: 72, logo: null },
     ],
   },
   {
@@ -78,14 +78,14 @@ const SKILL_CATEGORIES = [
     label: 'Robotics & Drones',
     color: '#00FF9C',
     skills: [
-      { name: 'Pixhawk / ArduPilot', level: 82 },
-      { name: 'Mission Planner', level: 80 },
-      { name: 'GPS Integration', level: 85 },
-      { name: 'Computer Vision on UAV', level: 80 },
-      { name: 'Autonomous Navigation', level: 78 },
-      { name: 'ESP32 Integration', level: 90 },
-      { name: 'Sensor Fusion', level: 78 },
-      { name: 'Drone Communication', level: 80 },
+      { name: 'Pixhawk / ArduPilot', level: 82, logo: null },
+      { name: 'Mission Planner', level: 80, logo: null },
+      { name: 'GPS Integration', level: 85, logo: null },
+      { name: 'Computer Vision on UAV', level: 80, logo: null },
+      { name: 'Autonomous Navigation', level: 78, logo: null },
+      { name: 'ESP32 Integration', level: 90, logo: 'https://cdn.simpleicons.org/espressif/E7352C' },
+      { name: 'Sensor Fusion', level: 78, logo: null },
+      { name: 'Drone Communication', level: 80, logo: null },
     ],
   },
 ];
@@ -131,7 +131,7 @@ export default function SkillsPage() {
         {/* Header */}
         <div className="mb-16">
           <p className="font-mono text-xs text-cyan-400 tracking-widest uppercase mb-2">Technical Expertise</p>
-          <h1 className="font-orbitron text-4xl lg:text-5xl font-black text-white section-title mb-4">Skills & Tools</h1>
+          <h1 className="font-orbitron text-4xl lg:text-5xl font-black text-white section-title mb-4">Skills &amp; Tools</h1>
           <p className="text-[#BFC7D5] font-ibm max-w-lg">
             A living dashboard of my technical capabilities — from bare-metal firmware to edge AI deployment on embedded hardware.
           </p>
@@ -161,7 +161,7 @@ export default function SkillsPage() {
         {/* Skill grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {active.skills.map(skill => (
-            <SkillCard key={skill.name} name={skill.name} level={skill.level} color={active.color} />
+            <SkillCard key={skill.name} name={skill.name} level={skill.level} color={active.color} logo={skill.logo ?? null} />
           ))}
         </div>
 
@@ -219,7 +219,7 @@ export default function SkillsPage() {
   );
 }
 
-function SkillCard({ name, level, color }: { name: string; level: number; color: string }) {
+function SkillCard({ name, level, color, logo }: { name: string; level: number; color: string; logo: string | null }) {
   return (
     <div
       className="p-4 rounded-xl border bg-[#0B0F12] group hover:bg-[#0d1318] transition-all duration-300"
@@ -234,8 +234,20 @@ function SkillCard({ name, level, color }: { name: string; level: number; color:
       }}
     >
       <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-xs text-white">{name}</span>
-        <span className="font-mono text-xs" style={{ color }}>{level}%</span>
+        <div className="flex items-center gap-1.5 min-w-0">
+          {logo && (
+            <img
+              src={logo}
+              alt=""
+              width={14}
+              height={14}
+              className="flex-shrink-0 opacity-80"
+              style={{ filter: 'brightness(1.15)' }}
+            />
+          )}
+          <span className="font-mono text-xs text-white truncate">{name}</span>
+        </div>
+        <span className="font-mono text-xs flex-shrink-0 ml-2" style={{ color }}>{level}%</span>
       </div>
       {/* Progress bar */}
       <div className="h-px bg-[#1C222B] relative overflow-hidden">

@@ -35,13 +35,15 @@ const PROJECTS = [
     title: 'Water Contamination Detection',
     subtitle: 'Industrial IoT Sensing Platform',
     description: 'Multi-parameter industrial water monitoring system measuring pH, TDS, conductivity, turbidity, and UV sterilization status. Features automatic isolation valve control, IoT dashboard, and ESP32-based embedded control.',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/projects/water-contamination.jpg',
     tags: ['ESP32', 'pH Sensor', 'TDS', 'Conductivity', 'Turbidity', 'IoT Dashboard'],
     status: 'Completed',
     color: '#1E88E5',
     featured: false,
     year: '2023',
     role: 'Embedded Systems Engineer',
+    contain: true,
+    imageBg: 'bg-gradient-to-r from-[#ADADAF] to-[#8B8A85]',
   },
   {
     slug: 'laundry-management',
@@ -55,32 +57,38 @@ const PROJECTS = [
     featured: false,
     year: '2023',
     role: 'Embedded Engineer',
+    contain: true,
+    imageBg: 'bg-[#0B0F12]',
   },
   {
     slug: 'dac-pcb',
     title: 'Industrial DAC PCB',
     subtitle: 'Altium Designer — 50+ Components',
     description: 'Industrial-grade DAC PCB designed in Altium Designer featuring 50+ components. Includes full schematic capture, multilayer PCB layout, DFM review, signal routing, and power distribution for industrial sensor applications.',
-    image: 'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/projects/dac-pcb.jpg',
     tags: ['Altium Designer', 'PCB Routing', 'DFM', 'Schematic', 'Multilayer PCB'],
     status: 'Completed',
     color: '#00FF9C',
     featured: false,
     year: '2024',
     role: 'PCB Design Lead',
+    contain: true,
+    imageBg: 'bg-gradient-to-b from-[#C0C5CB] to-[#818D99]',
   },
   {
     slug: 'queueless-billing',
     title: 'Queueless Billing System',
     subtitle: 'Computer Vision Checkout',
     description: 'Computer vision-based retail checkout system using an overhead camera and object detection to automatically identify and bill items without barcode scanning. Research paper authored on this project.',
-    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/projects/queueless-billing.png',
     tags: ['Raspberry Pi', 'OpenCV', 'Python', 'Object Detection'],
     status: 'Research',
     color: '#00E5FF',
     featured: false,
     year: '2025',
     role: 'CV & Embedded Engineer',
+    contain: true,
+    imageBg: 'bg-[#2D2D2D]',
   },
 ];
 
@@ -130,9 +138,11 @@ function FeaturedProjectCard(p: typeof PROJECTS[0]) {
   return (
     <div className="group relative rounded-xl overflow-hidden border border-[#1C222B] hover:border-cyan-400/30 transition-all duration-500 bg-[#0B0F12]">
       {/* Image */}
-      <div className="relative h-64 overflow-hidden">
-        <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, rgba(5,5,5,0.1), rgba(5,5,5,0.85))` }} />
+      <div className={`relative h-64 overflow-hidden ${p.contain ? (p.imageBg || '') : ''}`}>
+        <img src={p.image} alt={p.title} className={`w-full h-full ${p.contain ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`} />
+        {!p.contain && (
+          <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, rgba(5,5,5,0.1), rgba(5,5,5,0.85))` }} />
+        )}
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${p.color}60, transparent)` }} />
 
         {/* Status & Year */}
@@ -178,9 +188,11 @@ function FeaturedProjectCard(p: typeof PROJECTS[0]) {
 function ProjectCard(p: typeof PROJECTS[0]) {
   return (
     <div className="group relative rounded-xl overflow-hidden border border-[#1C222B] hover:border-cyan-400/30 transition-all duration-500 bg-[#0B0F12]">
-      <div className="relative h-40 overflow-hidden">
-        <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.2), rgba(5,5,5,0.85))' }} />
+      <div className={`relative h-40 overflow-hidden ${p.contain ? (p.imageBg || '') : ''}`}>
+        <img src={p.image} alt={p.title} className={`w-full h-full ${p.contain ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`} />
+        {!p.contain && (
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.2), rgba(5,5,5,0.85))' }} />
+        )}
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${p.color}50, transparent)` }} />
         <div className="absolute top-3 left-3">
           <span className="font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 rounded" style={{ color: STATUS_COLOR[p.status], background: `${STATUS_COLOR[p.status]}15`, border: `1px solid ${STATUS_COLOR[p.status]}30` }}>

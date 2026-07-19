@@ -19,6 +19,8 @@ const PROJECTS: Record<string, {
   results: string[];
   year: string;
   status: string;
+  contain?: boolean;
+  imageBg?: string;
 }> = {
   'rescue-wings': {
     title: 'Rescue Wings',
@@ -68,8 +70,7 @@ const PROJECTS: Record<string, {
     problem: 'Manual water quality testing is infrequent, slow, and requires lab infrastructure. Industrial water contamination events go undetected for hours, causing environmental and health damage.',
     solution: 'Deployed an array of low-cost electrochemical sensors interfaced with ESP32-S3 running TensorFlow Lite inference. Classifies 12 contamination types with 91% accuracy. Real-time MQTT dashboard.',
     images: [
-      'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=800',
+      '/projects/water-contamination.jpg',
     ],
     tags: ['ESP32-S3', 'TensorFlow Lite', 'MQTT', 'Node-RED', 'Custom PCB', 'I2C', 'SPI', 'Python', 'React'],
     color: '#1E88E5',
@@ -79,6 +80,8 @@ const PROJECTS: Record<string, {
     results: ['91% contamination classification accuracy', '30-second detection latency', 'Monitors 8 water parameters', '6-month continuous deployment', 'Government pilot project shortlisted'],
     year: '2023',
     status: 'Completed',
+    contain: true,
+    imageBg: 'bg-gradient-to-r from-[#ADADAF] to-[#8B8A85]',
   },
   'laundry-management': {
     title: 'Smart Laundry Management',
@@ -97,6 +100,8 @@ const PROJECTS: Record<string, {
     results: ['40% reduction in wait times', 'Zero unplanned downtime in 6-month trial', '200+ daily active users', '95% user satisfaction score'],
     year: '2023',
     status: 'Completed',
+    contain: true,
+    imageBg: 'bg-[#0B0F12]',
   },
   'dac-pcb': {
     title: 'High-Precision DAC PCB',
@@ -105,8 +110,7 @@ const PROJECTS: Record<string, {
     problem: 'Off-the-shelf DAC modules lack the precision, noise performance, and form factor required for custom embedded audio and industrial control applications.',
     solution: 'Designed a 4-layer board in Altium Designer with careful attention to signal integrity, power plane splitting, EMI containment, and thermal management. Achieved 0.001% THD+N.',
     images: [
-      'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+      '/projects/dac-pcb.jpg',
     ],
     tags: ['Altium Designer', 'PCB Design', 'Signal Integrity', 'EMC', 'Power Electronics', '4-Layer PCB'],
     color: '#00FF9C',
@@ -116,6 +120,8 @@ const PROJECTS: Record<string, {
     results: ['SNR: 112dB', 'THD+N: 0.001%', 'Output impedance: 100Ω', 'EMS/EMI IEC 61000 compliant', 'Manufactured via JLCPCB'],
     year: '2023',
     status: 'Completed',
+    contain: true,
+    imageBg: 'bg-gradient-to-b from-[#C0C5CB] to-[#818D99]',
   },
   'queueless-billing': {
     title: 'Queueless Billing System',
@@ -124,8 +130,7 @@ const PROJECTS: Record<string, {
     problem: 'Traditional retail checkout is slow, labor-intensive, and creates queues. Barcode scanning requires precise positioning and fails with damaged labels.',
     solution: 'Raspberry Pi 4 with overhead camera runs custom-trained EfficientDet model to identify retail items by visual appearance. 94% accuracy across 200 SKU categories with real-time checkout.',
     images: [
-      'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=800',
+      '/projects/queueless-billing.png',
     ],
     tags: ['Raspberry Pi 4', 'TensorFlow Lite', 'OpenCV', 'Python', 'React', 'SQLite', 'EfficientDet'],
     color: '#00E5FF',
@@ -135,6 +140,8 @@ const PROJECTS: Record<string, {
     results: ['94% SKU recognition accuracy', '200 product categories', '3-second average checkout time', 'Prototype deployed at college canteen'],
     year: '2022',
     status: 'Prototype',
+    contain: true,
+    imageBg: 'bg-[#2D2D2D]',
   },
 };
 
@@ -184,8 +191,8 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             </div>
           </div>
 
-          <div className="rounded-xl overflow-hidden border border-[#1C222B]">
-            <img src={project.images[0]} alt={project.title} className="w-full h-72 object-cover" />
+          <div className={`rounded-xl overflow-hidden border border-[#1C222B] h-72 flex items-center justify-center ${project.contain ? (project.imageBg || '') : ''}`}>
+            <img src={project.images[0]} alt={project.title} className={`w-full h-full ${project.contain ? 'object-contain' : 'object-cover'}`} />
           </div>
         </div>
 
@@ -256,19 +263,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           </div>
         </div>
 
-        {/* Gallery */}
-        {project.images.length > 1 && (
-          <div>
-            <p className="font-mono text-xs text-cyan-400 tracking-widest uppercase mb-6">Gallery</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {project.images.map((img, i) => (
-                <div key={i} className="rounded-lg overflow-hidden aspect-video border border-[#1C222B] hover:border-cyan-400/30 transition-all group">
-                  <img src={img} alt={`${project.title} ${i + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+
       </div>
     </div>
   );
