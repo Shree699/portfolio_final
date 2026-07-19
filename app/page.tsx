@@ -299,7 +299,7 @@ const FEATURED_PROJECTS = [
     subtitle: 'RF & Vision Based Detection System',
     tags: ['RF Detection', 'Computer Vision', 'Embedded Controller'],
     color: '#00FF9C',
-    image: 'https://images.pexels.com/photos/2810156/pexels-photo-2810156.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/projects/anti-drone-detection.jpeg',
     href: '/projects',
   },
   {

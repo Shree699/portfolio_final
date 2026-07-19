@@ -13,8 +13,6 @@ const NAV_ITEMS = [
   { label: 'Experience', href: '/experience' },
   { label: 'Research', href: '/research' },
   { label: 'Achievements', href: '/achievements' },
-  { label: 'Gallery', href: '/gallery' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 

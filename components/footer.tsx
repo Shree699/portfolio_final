@@ -6,7 +6,7 @@ import { Github, Linkedin, Mail, ArrowUp, Cpu } from 'lucide-react';
 
 const FOOTER_LINKS = [
   { section: 'Portfolio', links: [{ label: 'Projects', href: '/projects' }, { label: 'Skills', href: '/skills' }, { label: 'Experience', href: '/experience' }] },
-  { section: 'Research', links: [{ label: 'Publications', href: '/research' }, { label: 'Blog', href: '/blog' }, { label: 'Gallery', href: '/gallery' }] },
+  { section: 'Research', links: [{ label: 'Publications', href: '/research' }] },
   { section: 'Connect', links: [{ label: 'Contact', href: '/contact' }, { label: 'Resume', href: '/resume' }, { label: 'Achievements', href: '/achievements' }] },
 ];
 
