@@ -28,6 +28,7 @@ const FREELANCE_PROJECTS = [
     images: [
       { src: '/freelance/can-bus-display-board.png', caption: 'Display Interconnect' },
       { src: '/freelance/can-bus-reset-board.png', caption: 'Reset / Boot Switch' },
+      { src: '/freelance/can-bus-transceiver-board.png', caption: 'CAN Transceiver' },
     ],
   },
   {
@@ -163,7 +164,13 @@ function CardImageRegion({
       />
 
       <div
-        className={`${isSingle ? 'flex justify-center' : 'grid grid-cols-2 gap-2'}`}
+        className={`${
+          isSingle
+            ? 'flex justify-center'
+            : images.length === 3
+            ? 'grid grid-cols-3 gap-2'
+            : 'grid grid-cols-2 gap-2'
+        }`}
       >
         {isSingle ? (
           /* Single image: centred, same slot width as one cell in the 2-image grid */
