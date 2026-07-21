@@ -85,7 +85,7 @@ function PCBImageSlot({
     <div className="flex flex-col gap-1">
       {/* Image / placeholder box */}
       <div
-        className="relative aspect-square rounded-lg overflow-hidden group/img"
+        className="relative h-36 rounded-lg overflow-hidden group/img"
         style={{ background: 'rgba(5,5,5,0.7)' }}
       >
         {/* Corner bracket — top-left */}
@@ -153,7 +153,7 @@ function CardImageRegion({
      * Fixed-height container (h-44) so all 3 cards have an identical
      * image-region footprint regardless of image count.
      */
-    <div className="relative px-5 pt-5 pb-3">
+    <div className="relative px-5 pt-5 pb-3 overflow-hidden">
       {/* Faint horizontal PCB-trace accent above image area */}
       <div
         className="absolute top-0 left-5 right-5 h-px"
@@ -164,7 +164,6 @@ function CardImageRegion({
 
       <div
         className={`${isSingle ? 'flex justify-center' : 'grid grid-cols-2 gap-2'}`}
-        style={{ height: '9rem' }}
       >
         {isSingle ? (
           /* Single image: centred, same slot width as one cell in the 2-image grid */
