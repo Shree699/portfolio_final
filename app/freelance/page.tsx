@@ -1,7 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Lock } from 'lucide-react';
+import { Lock, ImageIcon } from 'lucide-react';
+import Image from 'next/image';
+import { useState } from 'react';
+
+/* ─── Data ──────────────────────────────────────────────── */
 
 const FREELANCE_PROJECTS = [
   {
@@ -10,6 +14,10 @@ const FREELANCE_PROJECTS = [
       'A two-board solar power management and control system with STM32-based local monitoring and LCD display.',
     tags: ['Altium Designer', 'STM32', 'Power Electronics', 'PCB Layout'],
     color: '#00E5FF',
+    images: [
+      { src: '/freelance/solar-mill-power-board.png', caption: 'Power Board' },
+      { src: '/freelance/solar-mill-controller-board.png', caption: 'Controller Board' },
+    ],
   },
   {
     title: 'Smart Gas Knob — WiFi Servo Control',
@@ -17,6 +25,9 @@ const FREELANCE_PROJECTS = [
       'A compact WiFi-enabled controller board for automated, servo-actuated gas valve control.',
     tags: ['ESP-01', 'WiFi', 'IoT', 'Embedded Firmware'],
     color: '#00FF9C',
+    images: [
+      { src: '/freelance/smart-gas-knob-board.png', caption: '' },
+    ],
   },
   {
     title: 'CAN Bus Display & Reset Interface',
@@ -24,16 +35,18 @@ const FREELANCE_PROJECTS = [
       'A CAN bus interconnect and reset/bootloader switch board for a networked display system.',
     tags: ['CAN Bus', 'Transceiver IC', 'Altium Designer', 'PCB Layout'],
     color: '#9D4EDD',
+    images: [
+      { src: '/freelance/can-bus-display-board.png', caption: 'Display Interconnect' },
+      { src: '/freelance/can-bus-reset-board.png', caption: 'Reset / Boot Switch' },
+    ],
   },
 ];
 
+/* ─── Animation variants ────────────────────────────────── */
+
 const containerVariants = {
   hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
+  show: { transition: { staggerChildren: 0.15 } },
 };
 
 const cardVariants = {
@@ -50,10 +63,261 @@ const headerVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
+/* ─── PCB image slot ─────────────────────────────────────── */
+
+/**
+ * Renders a Next.js <Image> if the file exists (detected via onError),
+ * otherwise falls back to a styled placeholder.  Either way the layout box
+ * is identical so swapping in a real image requires zero CSS changes.
+ */
+function PCBImageSlot({
+  src,
+  caption,
+  color,
+}: {
+  src: string;
+  caption: string;
+  color: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-1">
+      {/* Image / placeholder box */}
+      <div
+        className="relative aspect-square rounded-lg overflow-hidden group/img"
+        style={{ background: 'rgba(5,5,5,0.7)' }}
+      >
+        {/* Corner bracket — top-left */}
+        <div
+          className="absolute top-1.5 left-1.5 w-3 h-3 border-t border-l z-10 pointer-events-none"
+          style={{ borderColor: `${color}50` }}
+        />
+        {/* Corner bracket — bottom-right */}
+        <div
+          className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b border-r z-10 pointer-events-none"
+          style={{ borderColor: `${color}50` }}
+        />
+
+        {failed ? (
+          /* ── Placeholder ── */
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-2 border border-dashed"
+            style={{ borderColor: 'rgba(255,255,255,0.15)' }}
+          >
+            <ImageIcon size={20} className="text-white/25" />
+            {caption && (
+              <span className="font-mono text-[9px] text-white/25 tracking-widest uppercase text-center px-2">
+                {caption}
+              </span>
+            )}
+          </div>
+        ) : (
+          /* ── Real image ── */
+          <div className="absolute inset-0 transition-transform duration-500 group-hover/img:scale-105">
+            <Image
+              src={src}
+              alt={caption || 'PCB render'}
+              fill
+              sizes="(max-width: 768px) 100vw, 200px"
+              className="object-contain"
+              onError={() => setFailed(true)}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Caption */}
+      {caption && (
+        <p className="text-center font-mono text-[9px] text-white/40 uppercase tracking-widest">
+          {caption}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* ─── Image region (handles 1 or 2 images uniformly) ────── */
+
+function CardImageRegion({
+  images,
+  color,
+}: {
+  images: typeof FREELANCE_PROJECTS[0]['images'];
+  color: string;
+}) {
+  const isSingle = images.length === 1;
+
+  return (
+    /*
+     * Fixed-height container (h-44) so all 3 cards have an identical
+     * image-region footprint regardless of image count.
+     */
+    <div className="relative px-5 pt-5 pb-3">
+      {/* Faint horizontal PCB-trace accent above image area */}
+      <div
+        className="absolute top-0 left-5 right-5 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${color}30, transparent)`,
+        }}
+      />
+
+      <div
+        className={`grid gap-2 ${isSingle ? 'grid-cols-1' : 'grid-cols-2'}`}
+        /* Keep same visual height for 1-image vs 2-image layouts */
+        style={{ height: '9rem' }}
+      >
+        {isSingle ? (
+          /*
+           * Single image: wrap in a 2-col ghost grid so the image is centred
+           * and sits at the same height as a side-by-side pair.
+           */
+          <div className="flex items-stretch gap-2">
+            {/* Left ghost spacer — invisible but keeps aspect ratio aligned */}
+            <div className="flex-1 opacity-0 pointer-events-none" aria-hidden>
+              <div className="aspect-square w-full" />
+            </div>
+
+            {/* The real single image, full width of right 50% */}
+            <div className="flex-1 flex flex-col gap-1">
+              <PCBImageSlot
+                src={images[0].src}
+                caption={images[0].caption}
+                color={color}
+              />
+            </div>
+          </div>
+        ) : (
+          images.map((img) => (
+            <PCBImageSlot key={img.src} src={img.src} caption={img.caption} color={color} />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Freelance card ─────────────────────────────────────── */
+
+function FreelanceCard({
+  title,
+  description,
+  tags,
+  color,
+  images,
+}: {
+  title: string;
+  description: string;
+  tags: string[];
+  color: string;
+  images: typeof FREELANCE_PROJECTS[0]['images'];
+}) {
+  return (
+    <motion.div
+      className="group relative rounded-xl overflow-hidden border border-[#1C222B] bg-[#0B0F12] transition-colors duration-500 flex flex-col"
+      variants={cardVariants}
+      whileHover={{ borderColor: `${color}40` }}
+    >
+      {/* Top colour-accent line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${color}70, transparent)`,
+        }}
+      />
+
+      {/* Corner bracket — top-right */}
+      <div
+        className="absolute top-3 right-3 w-4 h-4 border-t border-r opacity-40 group-hover:opacity-80 transition-opacity duration-300"
+        style={{ borderColor: color }}
+      />
+      {/* Corner bracket — bottom-left */}
+      <div
+        className="absolute bottom-3 left-3 w-4 h-4 border-b border-l opacity-40 group-hover:opacity-80 transition-opacity duration-300"
+        style={{ borderColor: color }}
+      />
+
+      {/* Solder-pad row */}
+      <div className="absolute top-0 left-5 flex gap-2 -translate-y-px" aria-hidden>
+        {[color, '#1C222B', color].map((c, i) => (
+          <div
+            key={i}
+            className="w-1.5 h-1.5 rounded-full"
+            style={{
+              background: c,
+              boxShadow: i !== 1 ? `0 0 5px ${c}` : 'none',
+              opacity: 0.5,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ── Image region (top of card) ── */}
+      <CardImageRegion images={images} color={color} />
+
+      {/* Thin separator between image region and card body */}
+      <div
+        className="mx-5 h-px"
+        style={{ background: `linear-gradient(90deg, transparent, ${color}20, transparent)` }}
+      />
+
+      {/* ── Card body ── */}
+      <div className="p-5 pt-4 flex flex-col flex-1">
+        {/* Lock badge */}
+        <div className="flex items-center gap-2 mb-4">
+          <span
+            className="font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 rounded flex items-center gap-1"
+            style={{
+              color,
+              background: `${color}12`,
+              border: `1px solid ${color}25`,
+            }}
+          >
+            <Lock size={9} />
+            Client Project
+          </span>
+        </div>
+
+        {/* Title */}
+        <h2 className="font-orbitron text-sm font-bold text-white mb-3 leading-snug">
+          {title}
+        </h2>
+
+        {/* One-line description */}
+        <p className="text-[#BFC7D5] text-xs font-ibm leading-relaxed mb-5">
+          {description}
+        </p>
+
+        {/* Spacer pushes tags to bottom */}
+        <div className="flex-1" />
+
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <span key={tag} className="tech-tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Radial hover glow */}
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 50% 0%, ${color}06, transparent 70%)`,
+        }}
+      />
+    </motion.div>
+  );
+}
+
+/* ─── Page ───────────────────────────────────────────────── */
+
 export default function FreelancePage() {
   return (
     <div className="min-h-screen pt-24 pb-20 relative">
-      {/* Background layers — identical to other pages */}
+      {/* Background layers */}
       <div className="fixed inset-0 z-0 bg-grid-fine opacity-40 pointer-events-none" />
       <div
         className="fixed inset-0 z-0 pointer-events-none"
@@ -84,7 +348,7 @@ export default function FreelancePage() {
           </p>
         </motion.div>
 
-        {/* ── Confidentiality notice ── */}
+        {/* ── NDA notice ── */}
         <motion.div
           className="flex items-center gap-3 mb-10 px-4 py-3 rounded-lg border border-[#1C222B] bg-[#0B0F12] w-fit"
           variants={headerVariants}
@@ -98,9 +362,9 @@ export default function FreelancePage() {
           </span>
         </motion.div>
 
-        {/* ── Project cards grid ── */}
+        {/* ── Cards grid — items-stretch keeps all cards the same height ── */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -112,97 +376,5 @@ export default function FreelancePage() {
         </motion.div>
       </div>
     </div>
-  );
-}
-
-function FreelanceCard({
-  title,
-  description,
-  tags,
-  color,
-}: {
-  title: string;
-  description: string;
-  tags: string[];
-  color: string;
-}) {
-  return (
-    <motion.div
-      className="group relative rounded-xl overflow-hidden border border-[#1C222B] bg-[#0B0F12] transition-all duration-500"
-      variants={cardVariants}
-      whileHover={{ borderColor: `${color}40` }}
-    >
-      {/* Top colour-accent line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: `linear-gradient(90deg, transparent, ${color}70, transparent)` }}
-      />
-
-      {/* Corner bracket decorations (PCB aesthetic) */}
-      <div
-        className="absolute top-3 right-3 w-4 h-4 border-t border-r opacity-40 transition-opacity duration-300 group-hover:opacity-80"
-        style={{ borderColor: color }}
-      />
-      <div
-        className="absolute bottom-3 left-3 w-4 h-4 border-b border-l opacity-40 transition-opacity duration-300 group-hover:opacity-80"
-        style={{ borderColor: color }}
-      />
-
-      {/* Solder-pad accent row */}
-      <div className="absolute top-0 left-5 flex gap-2 -translate-y-px">
-        {[color, '#1C222B', color].map((c, i) => (
-          <div
-            key={i}
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: c, boxShadow: i !== 1 ? `0 0 5px ${c}` : 'none', opacity: 0.5 }}
-          />
-        ))}
-      </div>
-
-      {/* Card body */}
-      <div className="p-6 pt-7">
-        {/* Lock badge */}
-        <div className="flex items-center gap-2 mb-4">
-          <span
-            className="font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 rounded flex items-center gap-1"
-            style={{
-              color,
-              background: `${color}12`,
-              border: `1px solid ${color}25`,
-            }}
-          >
-            <Lock size={9} />
-            Client Project
-          </span>
-        </div>
-
-        {/* Title */}
-        <h2 className="font-orbitron text-sm font-bold text-white mb-3 leading-snug">
-          {title}
-        </h2>
-
-        {/* One-line description */}
-        <p className="text-[#BFC7D5] text-xs font-ibm leading-relaxed mb-5">
-          {description}
-        </p>
-
-        {/* Tech tags */}
-        <div className="flex flex-wrap gap-1.5">
-          {tags.map((tag) => (
-            <span key={tag} className="tech-tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Subtle hover radial glow — no interactive affordance */}
-      <div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse at 50% 0%, ${color}06, transparent 70%)`,
-        }}
-      />
-    </motion.div>
   );
 }
