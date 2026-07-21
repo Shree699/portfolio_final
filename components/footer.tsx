@@ -5,10 +5,11 @@ import { useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, ArrowUp, Cpu } from 'lucide-react';
 
 const FOOTER_LINKS = [
-  { section: 'Portfolio', links: [{ label: 'Projects', href: '/projects' }, { label: 'Skills', href: '/skills' }, { label: 'Experience', href: '/experience' }] },
+  { section: 'Portfolio', links: [{ label: 'Projects', href: '/projects' }, { label: 'Skills', href: '/skills' }, { label: 'Experience', href: '/experience' }, { label: 'Freelance', href: '/freelance' }] },
   { section: 'Research', links: [{ label: 'Publications', href: '/research' }] },
   { section: 'Connect', links: [{ label: 'Contact', href: '/contact' }, { label: 'Resume', href: '/resume' }, { label: 'Achievements', href: '/achievements' }] },
 ];
+
 
 function FooterPCB() {
   const svgRef = useRef<SVGSVGElement>(null);

@@ -11,10 +11,12 @@ const NAV_ITEMS = [
   { label: 'Projects', href: '/projects' },
   { label: 'Skills', href: '/skills' },
   { label: 'Experience', href: '/experience' },
+  { label: 'Freelance', href: '/freelance' },
   { label: 'Research', href: '/research' },
   { label: 'Achievements', href: '/achievements' },
   { label: 'Contact', href: '/contact' },
 ];
+
 
 export default function Navigation() {
   const pathname = usePathname();
