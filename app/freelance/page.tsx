@@ -20,16 +20,6 @@ const FREELANCE_PROJECTS = [
     ],
   },
   {
-    title: 'Smart Gas Knob — WiFi Servo Control',
-    description:
-      'A compact WiFi-enabled controller board for automated, servo-actuated gas valve control.',
-    tags: ['ESP-01', 'WiFi', 'IoT', 'Embedded Firmware'],
-    color: '#00FF9C',
-    images: [
-      { src: '/freelance/smart-gas-knob-board.png', caption: '' },
-    ],
-  },
-  {
     title: 'CAN Bus Display & Reset Interface',
     description:
       'A CAN bus interconnect and reset/bootloader switch board for a networked display system.',
@@ -38,6 +28,16 @@ const FREELANCE_PROJECTS = [
     images: [
       { src: '/freelance/can-bus-display-board.png', caption: 'Display Interconnect' },
       { src: '/freelance/can-bus-reset-board.png', caption: 'Reset / Boot Switch' },
+    ],
+  },
+  {
+    title: 'Smart Gas Knob — WiFi Servo Control',
+    description:
+      'A compact WiFi-enabled controller board for automated, servo-actuated gas valve control.',
+    tags: ['ESP-01', 'WiFi', 'IoT', 'Embedded Firmware'],
+    color: '#00FF9C',
+    images: [
+      { src: '/freelance/smart-gas-knob-board.png', caption: '' },
     ],
   },
 ];
@@ -163,29 +163,17 @@ function CardImageRegion({
       />
 
       <div
-        className={`grid gap-2 ${isSingle ? 'grid-cols-1' : 'grid-cols-2'}`}
-        /* Keep same visual height for 1-image vs 2-image layouts */
+        className={`${isSingle ? 'flex justify-center' : 'grid grid-cols-2 gap-2'}`}
         style={{ height: '9rem' }}
       >
         {isSingle ? (
-          /*
-           * Single image: wrap in a 2-col ghost grid so the image is centred
-           * and sits at the same height as a side-by-side pair.
-           */
-          <div className="flex items-stretch gap-2">
-            {/* Left ghost spacer — invisible but keeps aspect ratio aligned */}
-            <div className="flex-1 opacity-0 pointer-events-none" aria-hidden>
-              <div className="aspect-square w-full" />
-            </div>
-
-            {/* The real single image, full width of right 50% */}
-            <div className="flex-1 flex flex-col gap-1">
-              <PCBImageSlot
-                src={images[0].src}
-                caption={images[0].caption}
-                color={color}
-              />
-            </div>
+          /* Single image: centred, same slot width as one cell in the 2-image grid */
+          <div className="w-1/2 flex flex-col gap-1">
+            <PCBImageSlot
+              src={images[0].src}
+              caption={images[0].caption}
+              color={color}
+            />
           </div>
         ) : (
           images.map((img) => (
@@ -362,17 +350,34 @@ export default function FreelancePage() {
           </span>
         </motion.div>
 
-        {/* ── Cards grid — items-stretch keeps all cards the same height ── */}
+        {/*
+          ── Cards layout:
+          Mobile  → single column, all stacked
+          Tablet+ → 4-column grid:
+                      Row 1: Solar Mill (cols 1-2) | CAN Bus (cols 3-4)
+                      Row 2: Smart Gas Knob (cols 2-3, centred)
+        ──────────────────────────────────────────── */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
         >
-          {FREELANCE_PROJECTS.map((project) => (
-            <FreelanceCard key={project.title} {...project} />
-          ))}
+          {/* Row 1 — Solar Mill */}
+          <motion.div className="md:col-span-2" variants={cardVariants}>
+            <FreelanceCard {...FREELANCE_PROJECTS[0]} />
+          </motion.div>
+
+          {/* Row 1 — CAN Bus */}
+          <motion.div className="md:col-span-2" variants={cardVariants}>
+            <FreelanceCard {...FREELANCE_PROJECTS[1]} />
+          </motion.div>
+
+          {/* Row 2 — Smart Gas Knob, centred under the gap between the two above */}
+          <motion.div className="md:col-start-2 md:col-span-2" variants={cardVariants}>
+            <FreelanceCard {...FREELANCE_PROJECTS[2]} />
+          </motion.div>
         </motion.div>
       </div>
     </div>
