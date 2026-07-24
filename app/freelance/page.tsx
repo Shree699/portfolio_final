@@ -26,9 +26,8 @@ const FREELANCE_PROJECTS = [
     tags: ['CAN Bus', 'Transceiver IC', 'Altium Designer', 'PCB Layout'],
     color: '#9D4EDD',
     images: [
-      { src: '/freelance/can-bus-display-board.png', caption: 'Display Interconnect' },
       { src: '/freelance/can-bus-reset-board.png', caption: 'Reset / Boot Switch' },
-      { src: '/freelance/can-bus-transceiver-board.png', caption: 'CAN Transceiver' },
+      { src: '/freelance/can-bus-transceiver-board.png', caption: 'CAN Display Connector' },
     ],
   },
   {
