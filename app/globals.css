@@ -528,3 +528,91 @@ body {
 
 [data-theme="light"] .neon-cyan { color: #0099BB; text-shadow: none; }
 [data-theme="light"] .neon-emerald { color: #00897B; text-shadow: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT THEME — Tailwind utility + inline-style colour overrides
+   All selectors include !important to beat Tailwind specificity
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Body / page base ── */
+[data-theme="light"] body,
+[data-theme="light"] main { color: #0F172A !important; background-color: #F0F4F8 !important; }
+
+/* ── Dark card & section backgrounds ── */
+[data-theme="light"] .bg-\[\#050505\],
+[data-theme="light"] .bg-\[\#0B0F12\],
+[data-theme="light"] .bg-\[\#0d1318\],
+[data-theme="light"] .bg-\[\#080c10\],
+[data-theme="light"] .bg-\[\#060a0d\],
+[data-theme="light"] .bg-\[\#111827\] { background-color: #FFFFFF !important; }
+
+/* ── Dark-background divs that are also cards (by common inline bg) ── */
+[data-theme="light"] [style*="background: rgba(5,5,5"],
+[data-theme="light"] [style*="background:rgba(5,5,5"],
+[data-theme="light"] [style*="background-color:#050505"],
+[data-theme="light"] [style*="background-color: #050505"] { background-color: #FFFFFF !important; }
+
+/* ── Dark borders ── */
+[data-theme="light"] .border-\[\#1C222B\] { border-color: #CBD5E1 !important; }
+
+/* ── White text → near-black ── */
+[data-theme="light"] .text-white { color: #0F172A !important; }
+
+/* ── Secondary / muted text ── */
+[data-theme="light"] .text-\[\#BFC7D5\] { color: #4B5563 !important; }
+[data-theme="light"] .text-\[\#8892A4\] { color: #6B7280 !important; }
+[data-theme="light"] .text-\[\#6B7280\] { color: #6B7280 !important; }
+
+/* ── Cyan accent text ── */
+[data-theme="light"] .text-cyan-400 { color: #0099BB !important; }
+[data-theme="light"] .border-cyan-400 { border-color: #0099BB !important; }
+[data-theme="light"] .border-cyan-400\/50 { border-color: rgba(0,153,187,0.5) !important; }
+
+/* ── font-mono small labels that are muted ── */
+[data-theme="light"] .font-mono { color: inherit; }
+
+/* ── Page fixed backgrounds ── */
+[data-theme="light"] .fixed.inset-0.bg-\[\#050505\],
+[data-theme="light"] .fixed.inset-0 { background-color: transparent !important; }
+
+/* ── Footer ── */
+[data-theme="light"] footer {
+  background-color: #E2E8F0 !important;
+  border-top-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+[data-theme="light"] footer .text-white { color: #0F172A !important; }
+[data-theme="light"] footer .text-\[\#BFC7D5\] { color: #4B5563 !important; }
+[data-theme="light"] footer .border-\[\#1C222B\] { border-color: #CBD5E1 !important; }
+[data-theme="light"] footer a { color: #374151 !important; }
+[data-theme="light"] footer a:hover { color: #0F172A !important; }
+
+/* ── Headings always visible ── */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 { color: #0F172A !important; }
+
+/* ── Paragraph / body copy ── */
+[data-theme="light"] p { color: #374151 !important; }
+
+/* ── Orbitron headings keep brand weight but go dark ── */
+[data-theme="light"] .font-orbitron { color: #0F172A !important; }
+
+/* ── Mono / IBM Plex labels ── */
+[data-theme="light"] .font-ibm { color: #4B5563 !important; }
+
+/* ── Specific accent overrides — keep cyan tint on kicker labels ── */
+[data-theme="light"] .text-cyan-400.font-mono,
+[data-theme="light"] p.font-mono.text-cyan-400 { color: #0099BB !important; }
+
+/* ── Timeline line ── */
+[data-theme="light"] .timeline-line {
+  background: linear-gradient(180deg, #0099BB, #1565C0, transparent) !important;
+}
+
+/* ── Hover border colours for cards ── */
+[data-theme="light"] .hover\:border-cyan-400\/30:hover { border-color: rgba(0,153,187,0.3) !important; }
+
+/* ── Hero / page background overlay gradients — lighten them ── */
+[data-theme="light"] [style*="radial-gradient"] { opacity: 0.3; }
