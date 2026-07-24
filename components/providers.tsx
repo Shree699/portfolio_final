@@ -5,6 +5,7 @@ import CustomCursor from '@/components/custom-cursor';
 import Loader from '@/components/loader';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
+import { ThemeProvider } from '@/contexts/theme-context';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +16,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <>
+    <ThemeProvider>
       <CustomCursor />
       {!loaded && <Loader onComplete={() => setLoaded(true)} />}
       <div className={`transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -23,6 +24,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <main>{children}</main>
         <Footer />
       </div>
-    </>
+    </ThemeProvider>
   );
 }

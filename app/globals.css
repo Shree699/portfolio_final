@@ -423,3 +423,131 @@ body {
     display: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   LIGHT THEME  —  applied when <html data-theme="light">
+   ═══════════════════════════════════════════════════════ */
+
+/* Smooth colour transitions when toggling */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+html[data-theme="light"] {
+  --bg-primary:    #f0f4f8;
+  --bg-secondary:  #ffffff;
+  --border-color:  #cbd5e1;
+  --text-secondary:#475569;
+  --glass:         rgba(255,255,255,0.7);
+  --cyan:          #0284c7;
+  --emerald:       #059669;
+  --violet:        #7c3aed;
+  --electric-blue: #1d4ed8;
+}
+
+html[data-theme="light"] body {
+  background-color: #f0f4f8;
+  color: #0f172a;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-track { background: #e2e8f0; }
+
+/* Grid background */
+html[data-theme="light"] .bg-grid-fine {
+  background-image:
+    linear-gradient(rgba(2,132,199,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2,132,199,0.06) 1px, transparent 1px);
+}
+
+/* Navigation */
+html[data-theme="light"] nav {
+  background: rgba(240,244,248,0.9) !important;
+}
+html[data-theme="light"] .glass-strong {
+  background: rgba(240,244,248,0.95);
+  border-color: rgba(2,132,199,0.12);
+}
+html[data-theme="light"] .nav-link        { color: #475569; }
+html[data-theme="light"] .nav-link:hover  { color: #0f172a; }
+html[data-theme="light"] .nav-link.active { color: #0284c7; }
+html[data-theme="light"] .nav-link::after { background: #0284c7; }
+
+/* Cards — override hardcoded dark backgrounds */
+html[data-theme="light"] .glass {
+  background: rgba(255,255,255,0.75);
+  border-color: rgba(203,213,225,0.9);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* Tech tags */
+html[data-theme="light"] .tech-tag {
+  background: rgba(2,132,199,0.08);
+  border-color: rgba(2,132,199,0.22);
+  color: #0369a1;
+}
+html[data-theme="light"] .tech-tag:hover {
+  background: rgba(2,132,199,0.14);
+  border-color: #0284c7;
+  box-shadow: 0 0 8px rgba(2,132,199,0.15);
+}
+
+/* Skill chips */
+html[data-theme="light"] .skill-chip {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(203,213,225,0.9);
+  color: #475569;
+}
+html[data-theme="light"] .skill-chip:hover {
+  border-color: rgba(2,132,199,0.4);
+  color: #0f172a;
+}
+html[data-theme="light"] .skill-chip .chip-dot {
+  background: #0284c7;
+  box-shadow: 0 0 4px rgba(2,132,199,0.4);
+}
+
+/* Button glow */
+html[data-theme="light"] .btn-glow {
+  border-color: #0284c7;
+  color: #0284c7;
+}
+html[data-theme="light"] .btn-glow::before { background: #0284c7; }
+html[data-theme="light"] .btn-glow:hover   { color: #ffffff; box-shadow: 0 0 18px rgba(2,132,199,0.3); }
+
+/* Section title accent line */
+html[data-theme="light"] .section-title::after {
+  background: linear-gradient(90deg, #0284c7, transparent);
+}
+
+/* Footer */
+html[data-theme="light"] footer {
+  background: #e2e8f0 !important;
+  border-top-color: #cbd5e1 !important;
+}
+
+/* Timeline */
+html[data-theme="light"] .timeline-line {
+  background: linear-gradient(180deg, #0284c7, #1d4ed8, transparent);
+}
+
+/* Neon text */
+html[data-theme="light"] .neon-cyan {
+  color: #0284c7;
+  text-shadow: none;
+}
+html[data-theme="light"] .neon-emerald {
+  color: #059669;
+  text-shadow: none;
+}
+
+/* Theme toggle button */
+html[data-theme="light"] .theme-toggle-btn {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+html[data-theme="light"] .theme-toggle-btn:hover {
+  border-color: #0284c7;
+  color: #0284c7;
+}

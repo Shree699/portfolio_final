@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Cpu } from 'lucide-react';
+import { Menu, X, Cpu, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/contexts/theme-context';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
@@ -23,6 +24,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -73,8 +75,17 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* CTA */}
+          {/* Theme toggle + Resume CTA */}
           <div className="hidden lg:flex items-center gap-3">
+            <button
+              onClick={toggle}
+              aria-label="Toggle theme"
+              className="w-8 h-8 flex items-center justify-center border border-[#1C222B] theme-toggle-btn rounded transition-all duration-300 hover:border-cyan-400/40 text-[#BFC7D5] hover:text-cyan-400"
+            >
+              {theme === 'dark'
+                ? <Sun size={14} />
+                : <Moon size={14} />}
+            </button>
             <Link
               href="/resume"
               className="btn-glow px-4 py-2 text-xs font-mono tracking-widest uppercase rounded"
@@ -114,6 +125,14 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
+          {/* Mobile theme toggle */}
+          <button
+            onClick={() => { toggle(); setMobileOpen(false); }}
+            className="flex items-center gap-2 font-mono text-sm tracking-widest uppercase text-[#BFC7D5] hover:text-cyan-400 transition-colors mt-2"
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          </button>
           <Link
             href="/resume"
             onClick={() => setMobileOpen(false)}
