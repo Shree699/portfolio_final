@@ -5,7 +5,7 @@ import CustomCursor from '@/components/custom-cursor';
 import Loader from '@/components/loader';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import { ThemeProvider } from '@/contexts/theme-context';
+import { ThemeProvider } from '@/components/theme-context';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [loaded, setLoaded] = useState(false);
