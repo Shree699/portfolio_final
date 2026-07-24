@@ -21,9 +21,9 @@ const SKILL_CATEGORIES = [
   {
     id: 'pcb',
     label: 'PCB Design',
-    color: '#00FF9C',
+    color: '#00994D',
     skills: [
-      { name: 'Altium Designer', level: 90, logo: 'https://cdn.simpleicons.org/altiumdesigner/A5915F' },
+      { name: 'Altium Designer', level: 90, logo: 'altium' },
       { name: 'KiCad', level: 88, logo: 'https://cdn.simpleicons.org/kicad/314CB0' },
       { name: 'Proteus', level: 82, logo: null },
       { name: 'Schematic Capture', level: 95, logo: null },
@@ -96,8 +96,8 @@ const ALL_CHIPS = [
   { name: 'Arduino UNO/Nano', category: 'Embedded', color: '#00E5FF' },
   { name: 'NVIDIA Jetson Orin', category: 'AI Hardware', color: '#00FF9C' },
   { name: 'Raspberry Pi 5', category: 'SBC', color: '#00FF9C' },
-  { name: 'Altium Designer', category: 'PCB', color: '#00FF9C' },
-  { name: 'KiCad', category: 'PCB', color: '#00FF9C' },
+  { name: 'Altium Designer', category: 'PCB', color: '#00994D' },
+  { name: 'KiCad', category: 'PCB', color: '#00994D' },
   { name: 'YOLO / YOLO11', category: 'AI', color: '#9D4EDD' },
   { name: 'OpenCV', category: 'CV', color: '#9D4EDD' },
   { name: 'PyTorch', category: 'AI', color: '#9D4EDD' },
@@ -235,7 +235,13 @@ function SkillCard({ name, level, color, logo }: { name: string; level: number; 
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-1.5 min-w-0">
-          {logo && (
+          {logo === 'altium' ? (
+            /* Custom Altium Designer SVG logo */
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 opacity-90">
+              <path d="M12 2L2 19.5h4.5L12 8.5l5.5 11H22L12 2z" fill="#A5915F"/>
+              <path d="M7.5 19.5h9L12 11l-4.5 8.5z" fill="#C4A96B" opacity="0.7"/>
+            </svg>
+          ) : logo ? (
             <img
               src={logo}
               alt=""
@@ -244,7 +250,7 @@ function SkillCard({ name, level, color, logo }: { name: string; level: number; 
               className="flex-shrink-0 opacity-80"
               style={{ filter: 'brightness(1.15)' }}
             />
-          )}
+          ) : null}
           <span className="font-mono text-xs text-white truncate">{name}</span>
         </div>
         <span className="font-mono text-xs flex-shrink-0 ml-2" style={{ color }}>{level}%</span>
